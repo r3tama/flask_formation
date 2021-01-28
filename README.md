@@ -1,1 +1,3 @@
-This is a basic flask project that configures a login page and some other sample endpoints like / which prints a hello world and /home that has an hyperref link to the home endpoint "/"
+This is a repo for training and learning concepts about the whole flask Python framework.
+
+This proyect consist in a basic API that lets you create, modify, and check todo's lists.  
