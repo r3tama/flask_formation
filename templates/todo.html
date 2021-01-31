@@ -6,12 +6,12 @@
   <body>
     <div class="container">
       <form action="{{ url_for('recover_data') }}" method="post">
-        <input type="text" placeholder="Todo task" name="todoInput" value="{{
-          request.form.todoInput }}">
+        <input type="text" placeholder="Todo task" name="todoInput" value="">
+        <input type="text" placeholder="Todo Header" name="todoHeader" value="">
         <input class="btn btn-default" type="submit" value="Add">
       </form>
-      
-    
+
+
       <a href="{{ url_for('show_all_todos')}}"> Finish</a>
 
       {% if data %}
