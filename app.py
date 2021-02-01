@@ -1,13 +1,6 @@
-from flask import Flask, url_for, render_template, request, Response, redirect, make_response, jsonify
-
+from flask import Flask, url_for, render_template, request, Response, redirect
 app = Flask(__name__)
-
-todoDict = {
-
-}
-
-todoList = []
-
+todoDict = {}
 
 @app.route('/')
 def index():
@@ -21,18 +14,12 @@ def show_todo_form():
 
 @app.route("/todo/set/", methods=['POST'])
 def recover_data():
-    global todoList
     todoTask = request.form['todoInput']
     todoHeader = request.form['todoHeader']
-
     if todoHeader in todoDict.keys():
-        todoList = todoDict[todoHeader]    # if todoHeader exists, save all the data that his value contains
-        todoList.append(todoTask)          # Then add the new data to the value
+        todoDict[todoHeader].append(todoTask)
     else:
-        todoList.append(todoTask)          # if the header doesnt exist create it and set the value
-        todoDict[todoHeader] = todoList
-    
-    todoList = []  #Clean the array so there is no trash data when accesing each iteration
+        todoDict[todoHeader] = [todoTask]
     return render_template("todo.html", data=todoDict)
 
 
@@ -41,12 +28,6 @@ def show_all_todos():
     return render_template("allTodos.html", data=todoDict)
 
 #Delete function
-
-@app.route("/todo/delete/<string:todoDelete>", methods=["DELETE", "GET"])
-def delete_todo(todoDelete):
-    if deleteHeader(todoDict, todoDelete):
-        return Response("Element Deleted", 204)
-    return Response("Element not found", 404)
 
 
 def deleteHeader(dict_, header):
