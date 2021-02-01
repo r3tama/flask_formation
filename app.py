@@ -1,17 +1,15 @@
 from flask import Flask, request, make_response
-from shared.utils import deleteValueFromDict, existsKeyInDict
+from shared.utils import deleteValueFromListInDict, existsKeyInDict
 app = Flask(__name__)
 todoDict = {}
 
 
 @app.route("/todo/set/", methods=["POST"])
 def recover_data():
-    todoTask = request.form['todoInput']
-    todoHeader = request.form['todoHeader']
-    if existsKeyInDict(todoHeader, todoDict):
-        todoDict[todoHeader].append(todoTask)
+    if existsKeyInDict(request.form['todoHeader'], todoDict):
+        todoDict[request.form['todoHeader']].append(request.form['todoInput'])
     else:
-        todoDict[todoHeader] = [todoTask]
+        todoDict[request.form['todoHeader']] = [request.form['todoInput']]
     return make_response(todoDict)
 
 
@@ -22,7 +20,7 @@ def show_all_todos():
 
 @app.route("/todo/delete/", methods=["DELETE"])
 def delete_todo():
-    if deleteValueFromDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict):
+    if deleteValueFromListInDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict):
         return make_response(todoDict, 204)
     return make_response(todoDict, 404)
 
