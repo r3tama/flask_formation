@@ -9,30 +9,27 @@ TEST_DIC = {
 
 EMPTY_TEST_DIC = {}
 
-def test_existsKeyInDict_givenExistingKey():
-    return_value = existsKeyInDict("list1",TEST_DIC)
-    assert return_value
+@pytest.mark.parametrize("data, expected", [("list1",True),("list2",True),("list3",True)])
+def test_existsKeyInDict_givenExistingKey(data,expected): 
+    assert existsKeyInDict(data,TEST_DIC) == expected
 
-def test_existsKeyInDict_withoutExistingKey():
-    return_value = existsKeyInDict("list4",TEST_DIC)
-    assert not return_value
+@pytest.mark.parametrize("data, expected", [("list4",False),("list5",False),("list6",False)])
+def test_existsKeyInDict_withoutExistingKey(data,expected):
+    assert existsKeyInDict(data,TEST_DIC) == expected
 
 def test_existsKeyInDict_givenEmptyDict():
-    return_value = existsKeyInDict("list5",EMPTY_TEST_DIC)
-    assert not return_value
+    assert not existsKeyInDict("list5",EMPTY_TEST_DIC)
 
-def test_deleteValueFromListInDict_givenExistingKeyAndValue():
-    return_value = deleteValueFromListInDict("list1","task1",TEST_DIC)
-    assert return_value
+@pytest.mark.parametrize("data, expected", [("task1",True),("task2",True),("task3",True)])
+def test_deleteValueFromListInDict_givenExistingKeyAndValue(data,expected):
+    assert deleteValueFromListInDict("list1",data,TEST_DIC) == expected  
 
-def test_deleteValueFromListInDict_givenExistingKeyAndWithoutExistingValue():
-    return_value = deleteValueFromListInDict("list1","task6",TEST_DIC)
-    assert not return_value
+@pytest.mark.parametrize("data, expected", [("task4",False),("task5",False),("task6",False)])
+def test_deleteValueFromListInDict_givenExistingKeyAndWithoutExistingValue(data,expected):
+    assert not deleteValueFromListInDict("list1",data,TEST_DIC)
 
 def test_deleteValueFromListInDict_withoutExistingKey():
-    return_value = deleteValueFromListInDict("list1","task5",TEST_DIC)
-    assert not return_value
+    assert not deleteValueFromListInDict("list6","task1",TEST_DIC)
 
 def test_deleteValueFromListInDict_givenEmptyDic():
-    return_value = deleteValueFromListInDict("list1","task1",EMPTY_TEST_DIC)
-    assert not return_value
+    assert not deleteValueFromListInDict("list1","task1",EMPTY_TEST_DIC)
