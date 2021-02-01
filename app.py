@@ -1,5 +1,5 @@
 from flask import Flask, request, make_response
-
+from shared.utils import deleteValueFromDict, existsKeyInDict
 app = Flask(__name__)
 todoDict = {}
 
@@ -8,7 +8,7 @@ todoDict = {}
 def recover_data():
     todoTask = request.form['todoInput']
     todoHeader = request.form['todoHeader']
-    if todoHeader in todoDict.keys():
+    if existsKeyInDict(todoHeader, todoDict):
         todoDict[todoHeader].append(todoTask)
     else:
         todoDict[todoHeader] = [todoTask]
@@ -22,18 +22,9 @@ def show_all_todos():
 
 @app.route("/todo/delete/", methods=["DELETE"])
 def delete_todo():
-
-    if deleteHeader(todoDict, request.form['taskToDelete'],
-                    request.form['todoHeader']):
+    if deleteValueFromDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict):
         return make_response(todoDict, 204)
     return make_response(todoDict, 404)
-
-
-def deleteHeader(dict_, taskToDelete, todoHeader):
-    if taskToDelete in dict_[todoHeader]:
-        dict_[todoHeader].remove(taskToDelete)
-        return True
-    return False
 
 
 if __name__ == '__main__':
