@@ -1,16 +1,15 @@
 <head>
     <title>Flask Intro - login page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
   </head>
   <body>
+    
     <div class="container">
-      <form action="{{ url_for('recover_data') }}" method="post">
-        <input type="text" placeholder="Todo task" name="todoInput" value="">
+      <form action="/todo/delete/" method="">
         <input type="text" placeholder="Todo Header" name="todoHeader" value="">
-        <input class="btn btn-default" type="submit" value="Add">
+        <input class="btn btn-default" type="submit" value="Delete">
       </form>
-
-
       <a href="{{ url_for('show_all_todos')}}"> Finish</a>
 
       {% if data %}

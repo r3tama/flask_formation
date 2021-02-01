@@ -1,13 +1,6 @@
-
 from flask import Flask, url_for, render_template, request, Response, redirect
-
 app = Flask(__name__)
-
-
-todoList = {
-    "Todo": [],
-}
-
+todoDict = {}
 
 @app.route('/')
 def index():
@@ -22,18 +15,26 @@ def show_todo_form():
 @app.route("/todo/set/", methods=['POST'])
 def recover_data():
     todoTask = request.form['todoInput']
-    if not checkIfEmpty(todoTask):
-        todoList["Todo"].append(todoTask)
-        return render_template("todo.html", data=todoList)
-    return render_template("todo.html", error="You need to enter a non empty todo task")
+    todoHeader = request.form['todoHeader']
+    if todoHeader in todoDict.keys():
+        todoDict[todoHeader].append(todoTask)
+    else:
+        todoDict[todoHeader] = [todoTask]
+    return render_template("todo.html", data=todoDict)
 
 
 @app.route("/todo/showAll/", methods=['GET'])
 def show_all_todos():
-    return render_template("allTodos.html", data=todoList)
+    return render_template("allTodos.html", data=todoDict)
 
-def checkIfEmpty(inputString):
-    return len(inputString) <= 0
+
+
+def deleteHeader(dict_, header):
+    if header in dict_.keys():
+        dict_.pop(header)
+        return True
+    return False
+
 
 
 if __name__ == '__main__':
