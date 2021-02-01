@@ -40,6 +40,7 @@ def recover_data():
 def show_all_todos():
     return render_template("allTodos.html", data=todoDict)
 
+#Delete function
 
 @app.route("/todo/delete/<string:todoDelete>", methods=["DELETE", "GET"])
 def delete_todo(todoDelete):
