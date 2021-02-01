@@ -14,14 +14,12 @@ def show_todo_form():
 
 @app.route("/todo/set/", methods=['POST'])
 def recover_data():
-    todoArray = []
     todoTask = request.form['todoInput']
     todoHeader = request.form['todoHeader']
     if todoHeader in todoDict.keys():
         todoDict[todoHeader].append(todoTask)
     else:
-        todoArray.append(todoTask)
-        todoDict[todoHeader] = todoArray
+        todoDict[todoHeader] = [todoTask]
     return render_template("todo.html", data=todoDict)
 
 
