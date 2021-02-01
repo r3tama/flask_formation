@@ -9,23 +9,23 @@ TEST_DIC = {
 
 EMPTY_TEST_DIC = {}
 
-@pytest.mark.parametrize("data, expected", [("list1",True),("list2",True),("list3",True)])
-def test_existsKeyInDict_givenExistingKey(data,expected): 
-    assert existsKeyInDict(data,TEST_DIC) == expected
+@pytest.mark.parametrize("data", ["list1","list2","list3"])
+def test_existsKeyInDict_givenExistingKey(data): 
+    assert existsKeyInDict(data,TEST_DIC) 
 
-@pytest.mark.parametrize("data, expected", [("list4",False),("list5",False),("list6",False)])
-def test_existsKeyInDict_withoutExistingKey(data,expected):
-    assert existsKeyInDict(data,TEST_DIC) == expected
+@pytest.mark.parametrize("data", ["list4","list5","list6"])
+def test_existsKeyInDict_withoutExistingKey(data):
+    assert not existsKeyInDict(data,TEST_DIC) 
 
 def test_existsKeyInDict_givenEmptyDict():
     assert not existsKeyInDict("list5",EMPTY_TEST_DIC)
 
-@pytest.mark.parametrize("data, expected", [("task1",True),("task2",True),("task3",True)])
-def test_deleteValueFromListInDict_givenExistingKeyAndValue(data,expected):
-    assert deleteValueFromListInDict("list1",data,TEST_DIC) == expected  
+@pytest.mark.parametrize("data", ["task1","task2","task3"])
+def test_deleteValueFromListInDict_givenExistingKeyAndValue(data):
+    assert deleteValueFromListInDict("list1",data,TEST_DIC)  
 
-@pytest.mark.parametrize("data, expected", [("task4",False),("task5",False),("task6",False)])
-def test_deleteValueFromListInDict_givenExistingKeyAndWithoutExistingValue(data,expected):
+@pytest.mark.parametrize("data", ["task4","task5","task6"])
+def test_deleteValueFromListInDict_givenExistingKeyAndWithoutExistingValue(data):
     assert not deleteValueFromListInDict("list1",data,TEST_DIC)
 
 def test_deleteValueFromListInDict_withoutExistingKey():
