@@ -7,11 +7,18 @@ def deleteValueFromListInDict(key, value, dict_):
         if key == "":
             raise Exception
         
-        value in dict_[key]
-        dict_[key].remove(value)
-        
-        return True
+        if value in dict_[key]:
+            dict_[key].remove(value)
+            return True
+        return False
     except KeyError:
         return False
     except ValueError: 
         return False
+
+
+def swapTaskFromListInDict(key, swapoutvalue, swapinvalue, dict_):
+    if existsKeyInDict(key, dict_) and swapoutvalue in dict_[key]:
+        dict_[key] = [swapinvalue if value == swapoutvalue else value for value in dict_[key]]
+        return True
+    return False
