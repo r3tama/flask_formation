@@ -1,3 +1,4 @@
-flask_formation/
+venv/
 .vscode
 .DS_Store
+__pycache__

@@ -1,8 +1,17 @@
 def existsKeyInDict(key, dict_):
     return key in dict_.keys()
 
-def deleteValueFromDict(key, value, dict_):
-    if value in dict_[key]:
+
+def deleteValueFromListInDict(key, value, dict_):
+    try:
+        if key == "":
+            raise Exception
+        
+        value in dict_[key]
         dict_[key].remove(value)
+        
         return True
-    return False
+    except KeyError:
+        return False
+    except ValueError: 
+        return False
