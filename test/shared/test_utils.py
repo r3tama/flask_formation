@@ -1,5 +1,5 @@
 from shared.utils import deleteValueFromListInDict, existsKeyInDict, swapTaskFromListInDict
-import pytest,copy, ipdb
+import pytest,copy
 
 DIC = {
     "list1": ["task1","task2","task3"],
