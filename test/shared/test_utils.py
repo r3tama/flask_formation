@@ -1,5 +1,5 @@
 from shared.utils import deleteValueFromListInDict, existsKeyInDict, swapTaskFromListInDict
-import pytest,copy
+import pytest,copy, ipdb
 
 DIC = {
     "list1": ["task1","task2","task3"],
@@ -21,7 +21,6 @@ def test_existsKeyInDict_withoutExistingKey(data):
     assert not existsKeyInDict(data,TEST_DIC) 
 
 def test_existsKeyInDict_givenEmptyDict():
-    TEST_DIC=copy.deepcopy(DIC)
     assert not existsKeyInDict("list5",EMPTY_TEST_DIC)
 
 @pytest.mark.parametrize("data", ["task1","task2","task3"])
@@ -39,11 +38,9 @@ def test_deleteValueFromListInDict_withoutExistingKey():
     assert not deleteValueFromListInDict("list6","task1",TEST_DIC)
 
 def test_deleteValueFromListInDict_givenEmptyDic():
-    TEST_DIC=copy.deepcopy(DIC)
     assert not deleteValueFromListInDict("list1","task1",EMPTY_TEST_DIC)
 
 def test_deleteValueFromListInDict_givenEmptyKey():
-    TEST_DIC=copy.deepcopy(DIC)
     with pytest.raises(Exception):
         deleteValueFromListInDict("","task1",TEST_DIC)
 
@@ -60,9 +57,10 @@ def test_swapTaskFromListInDict_givenExistingKeyAndWithoutExistingSwapoutValue()
     assert not swapTaskFromListInDict("list2","task2","task5",TEST_DIC)
 
 def test_swapTaskFromListInDict_givenEmptyDict():
-    TEST_DIC=copy.deepcopy(DIC)
     assert not swapTaskFromListInDict("list1","task1","task5",EMPTY_TEST_DIC)
 
 def test_swapTaskFromListInDict_givenExistingKeyAndExistingSwapoutValue():
     TEST_DIC=copy.deepcopy(DIC)
     assert swapTaskFromListInDict("list1","task1","task5",TEST_DIC) 
+
+ipdb.set_trace()
