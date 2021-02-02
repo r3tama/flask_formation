@@ -33,3 +33,7 @@ def test_deleteValueFromListInDict_withoutExistingKey():
 
 def test_deleteValueFromListInDict_givenEmptyDic():
     assert not deleteValueFromListInDict("list1","task1",EMPTY_TEST_DIC)
+
+def test_deleteValueFromListInDict_givenEmptyKey():
+    with pytest.raises(Exception):
+        deleteValueFromListInDict("","task1",TEST_DIC)
