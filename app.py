@@ -10,26 +10,26 @@ def recover_data():
         todoDict[request.form['todoHeader']].append(request.form['todoInput'])
     else:
         todoDict[request.form['todoHeader']] = [request.form['todoInput']]
-    return make_response(todoDict)
+    return make_response(todoDict, 200)
 
 
 @app.route("/todo/showAll/", methods=['GET'])
 def show_all_todos():
-    return make_response(todoDict)
+    return make_response(todoDict,200)
 
 
 @app.route("/todo/delete/", methods=["DELETE"])
 def delete_todo():
     if deleteValueFromListInDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict):
-        return make_response(todoDict, 204)
+        return make_response(todoDict, 200)
     return make_response(todoDict, 404)
 
 
 @app.route("/todo/changeTask/", methods=['POST'])
 def change_task():
     if swapTaskFromListInDict(request.form["todoHeader"],request.form["swapouttask"],request.form["swapintask"],todoDict):
-        return make_response("True")
-    return make_response("False")
+        return make_response(todoDict, 200)
+    return make_response(todoDict, 404)
 
 
 
