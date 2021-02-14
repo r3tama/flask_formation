@@ -5,11 +5,10 @@ This proyect consist in a basic API that lets you create, modify, and check todo
 The data structure of the todo lists are these:
 
 {
-  "header":["task1","task2","task3" ... ]
+"header":["task1","task2","task3" ... ]
 }
 
 Where the header is the name of the list
-
 
 It has the next endpoints:
 
@@ -21,5 +20,4 @@ It has the next endpoints:
 
 /todo/changeTask/ that lets you change a task from a header with the input that the user desires. Form inputs are: 'todoHeader' -> Header, 'swapouttask' -> The name of the task you want to change, and 'swapintask' -> The task that you want to subsitute for swapouttask
 
-
-For trying it out i recommend you to use something like postman.
+For trying it out i recommend you to use something like postman. "https://www.postman.com/"
