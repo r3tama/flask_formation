@@ -2,13 +2,21 @@
 <table border="1">
     <style>
         ul {
-            list-style-type: none;
-            padding: 0;
-            border: 1px solid #ddd;
+            display: flex;
+            /*padding: 0px;*/
+            width: 100%;
+
+            flex-direction: column;
+            justify-content: space-between;
         }
-        ul li {
+
+        li {
             padding: 1px 5px;
             border-bottom: 1px solid #ddd;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     </style>
 
@@ -17,7 +25,18 @@
     <ul>
         {% for items in value %}
 
-        <li>{{items}}</li>
+        <li>
+            {{items}}
+            <form
+                class="form"
+                action="{{ url_for('delete_todo') }}"
+                method="post"
+            >
+                <input class="button" type="submit" value="Delete" />
+                <input type="hidden" value="{{key}}" name="todoHeader" />
+                <input type="hidden" value="{{items}}" name="taskToDelete" />
+            </form>
+        </li>
 
         {% endfor %}
     </ul>
