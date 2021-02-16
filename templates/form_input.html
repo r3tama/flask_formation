@@ -1,0 +1,7 @@
+{% extends "base_template.html" %} {% block content %}
+<form action="{{url_for('recover_data')}}" method="POST">
+    <p>List name <input type="text" name="todoHeader" /></p>
+    <p>Task item <input type="text" name="todoInput" /></p>
+    <p><input type="submit" value="submit" /></p>
+</form>
+{% endblock %}
