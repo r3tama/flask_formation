@@ -22,3 +22,6 @@ def swapTaskFromListInDict(key, swapoutvalue, swapinvalue, dict_):
         dict_[key] = [swapinvalue if value == swapoutvalue else value for value in dict_[key]]
         return True
     return False
+
+def eliminateTodoList(key,dict_):
+    dict_.pop(key,None)

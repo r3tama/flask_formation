@@ -4,4 +4,70 @@
     <p>Task item <input type="text" name="todoInput" /></p>
     <p><input type="submit" value="submit" /></p>
 </form>
+
+<br>
+<br>
+<br>
+<br>
+
+{% if dict %}
+
+<table border="1">
+    <style>
+        .p_header
+         {
+            display: flex;
+            width: 40%;
+            align-items: center;
+            justify-content: space-between;
+            font-style: italic;
+            font-size: x-large;
+        }
+        ul {
+            display: flex;
+            width: 100%;
+
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        li {
+            padding: 1px 5px;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: medium;
+        }
+    </style>
+
+    {% for key, value in dict.items() %}
+    <p class="p_header">{{ key }}
+        <form action="{{ url_for('delete_list') }}" method="post">
+            <input class="button" type="submit" value="Delete" />
+            <input type="hidden" value="{{key}}" name="todoList"/> 
+        </form>
+    </p>
+    <ul>
+        {% for items in value %}
+
+        <li>
+            {{items}}
+            <form
+                action="{{ url_for('delete_todo') }}"
+                method="post"
+            >
+                <input class="button" type="submit" value="Delete" />
+                <input type="hidden" value="{{key}}" name="todoHeader" />
+                <input type="hidden" value="{{items}}" name="taskToDelete" />
+            </form>
+        </li>
+
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</table>
+{% endif %}
+
 {% endblock %}

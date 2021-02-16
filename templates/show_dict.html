@@ -1,9 +1,13 @@
 {% extends "base_template.html" %} {% block content %}
 <table border="1">
     <style>
+        p {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
         ul {
             display: flex;
-            /*padding: 0px;*/
             width: 100%;
 
             flex-direction: column;
@@ -21,7 +25,9 @@
     </style>
 
     {% for key, value in dict.items() %}
-    <p>{{ key }}</p>
+    <p>{{ key }}
+        <form action="{{ url_for('delete_todo') }}"></form>
+    </p>
     <ul>
         {% for items in value %}
 
