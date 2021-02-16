@@ -26,11 +26,11 @@ def show_all_todos():
     return render_template('show_dict.html',dict=todoDict)
 
 
-@app.route("/todo/delete", methods=["DELETE"])
+@app.route("/todo/delete", methods=["POST"])
 def delete_todo():
-    if deleteValueFromListInDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict):
-        return make_response(todoDict, 200)
-    return make_response(todoDict, 404)
+    deleteValueFromListInDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict)
+    return redirect("/todo/showAll")
+    
 
 
 @app.route("/todo/changeTask", methods=['POST'])
