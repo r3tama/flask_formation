@@ -1,0 +1,26 @@
+{% extends "base_template.html" %} {% block content %}
+<table border="1">
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            border: 1px solid #ddd;
+        }
+        ul li {
+            padding: 1px 5px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+
+    {% for key, value in dict.items() %}
+    <p>{{ key }}</p>
+    <ul>
+        {% for items in value %}
+
+        <li>{{items}}</li>
+
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</table>
+{% endblock %}
