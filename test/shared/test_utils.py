@@ -7,18 +7,23 @@ DIC = {
     "list3": []
 }
 
+def factory_list_mocked() -> dict:
+    return {
+        "list1": ["task1","task2","task3"],
+        "list2": ["task1"],
+        "list3": []
+    }
+
 
 EMPTY_TEST_DIC = {}
 
 @pytest.mark.parametrize("data", ["list1","list2","list3"])
 def test_existsKeyInDict_givenExistingKey(data): 
-    TEST_DIC=copy.deepcopy(DIC)
-    assert existsKeyInDict(data,TEST_DIC) 
+    assert existsKeyInDict(data, factory_list_mocked()) 
 
 @pytest.mark.parametrize("data", ["list4","list5","list6"])
 def test_existsKeyInDict_withoutExistingKey(data):
-    TEST_DIC=copy.deepcopy(DIC)
-    assert not existsKeyInDict(data,TEST_DIC) 
+    assert not existsKeyInDict(data, factory_list_mocked()) 
 
 def test_existsKeyInDict_givenEmptyDict():
     assert not existsKeyInDict("list5",EMPTY_TEST_DIC)
