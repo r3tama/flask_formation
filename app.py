@@ -1,6 +1,9 @@
+import redis
 from flask import Flask, request, make_response, render_template, redirect
 from shared.utils import deleteValueFromListInDict, existsKeyInDict, swapTaskFromListInDict, eliminateTodoList
 app = Flask(__name__)
+
+cache = redis.Redis(host='redis', port=6379)
 todoDict = {}
 
 
@@ -42,4 +45,4 @@ def change_task():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
