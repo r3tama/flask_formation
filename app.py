@@ -1,6 +1,9 @@
+import redis
 from flask import Flask, request, make_response, render_template, redirect
-from shared.utils import deleteValueFromListInDict, existsKeyInDict, swapTaskFromListInDict
+from shared.utils import deleteValueFromListInDict, existsKeyInDict, swapTaskFromListInDict, eliminateTodoList
 app = Flask(__name__)
+
+cache = redis.Redis(host='redis', port=6379)
 todoDict = {}
 
 
@@ -11,7 +14,7 @@ def recover_data():
     else:
         if request.form['todoInput']:
             todoDict[request.form['todoHeader']] = [request.form['todoInput']]
-    return redirect("/todo/showAll")
+    return redirect("/fillFormRender")
 
 @app.route("/", methods=["GET"])
 def base_template():
@@ -19,19 +22,19 @@ def base_template():
 
 @app.route("/fillFormRender", methods=["GET"])
 def render_form():
-    return render_template('form_input.html')
+    return render_template('form_input.html',dict=todoDict)
 
-@app.route("/todo/showAll", methods=['GET'])
-def show_all_todos():
-    return render_template('show_dict.html',dict=todoDict)
 
 
 @app.route("/todo/delete", methods=["POST"])
 def delete_todo():
     deleteValueFromListInDict(request.form["todoHeader"], request.form["taskToDelete"], todoDict)
-    return redirect("/todo/showAll")
-    
+    return redirect("/fillFormRender")
 
+@app.route("/list/delete", methods=["POST"])
+def delete_list():   
+    eliminateTodoList(request.form["todoList"],todoDict)
+    return redirect("/fillFormRender")
 
 @app.route("/todo/changeTask", methods=['POST'])
 def change_task():
@@ -42,4 +45,4 @@ def change_task():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
